@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="hy"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Տեղադրել հայտարարություն — Rental Hub Երևան</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Armenian:wght@400;500;700&family=Noto+Serif+Armenian:wght@800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F3F4;--surface:#fff;--ink:#1B2B45;--muted:#5C6880;--line:#DDD8DB;--apricot:#E8891C;--err:#B3261E;--ok:#1E7A4F}
+@media (prefers-color-scheme:dark){:root{--bg:#111826;--surface:#182135;--ink:#EDEFF5;--muted:#A4AEC4;--line:#2B3650;--apricot:#F5A04A;--err:#FF8A80;--ok:#59C48F}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 "Noto Sans Armenian",system-ui,sans-serif}
+.wrap{max-width:680px;margin:0 auto;padding:24px 20px 60px}a{color:inherit}
+h1{font:800 clamp(24px,5vw,34px)/1.25 "Noto Serif Armenian",Georgia,serif;margin:8px 0 6px}
+.lead{color:var(--muted);margin:0 0 22px}
+form{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;gap:16px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+label{display:block;font-size:14px;color:var(--muted);font-weight:500;margin-bottom:4px}
+input[type=text],input[type=number],input[type=tel],select,textarea{width:100%;font:inherit;padding:11px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+textarea{min-height:90px}.checks{display:flex;flex-wrap:wrap;gap:8px 18px}.checks label{display:flex;gap:6px;align-items:center;color:var(--ink);margin:0}
+.err{color:var(--err);font-size:13px;min-height:0}.btn{font:700 16px inherit;background:var(--apricot);color:#1B1200;border:0;border-radius:8px;padding:13px 22px;cursor:pointer}
+.btn:disabled{opacity:.6}.hp{position:absolute;left:-9999px}.note{font-size:13px;color:var(--muted)}
+.done{background:var(--surface);border:2px solid var(--ok);border-radius:14px;padding:20px}.done code{word-break:break-all;display:block;background:var(--bg);padding:10px;border-radius:8px;margin:10px 0}
+:focus-visible{outline:3px solid var(--apricot);outline-offset:2px}
+</style></head><body><div class="wrap">
+<a href="/">← Վերադառնալ որոնմանը</a>
+<h1>Տեղադրել հայտարարություն</h1>
+<p class="lead">Ձեր հայտարարությունը կստուգվի մոդերատորի կողմից և կհրապարակվի ձեր նշած հեռախոսահամարով։ Խնդրում ենք նշել միայն ճիշտ տվյալներ։</p>
+<div id="done" class="done" hidden></div>
+<form id="f" novalidate>
+<div class="hp"><label>Կայք<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+<div class="row">
+<div><label for="district">Շրջան</label><select id="district" name="district"><option value="">Ընտրել…</option><option>Աջափնյակ</option><option>Ավան</option><option>Արաբկիր</option><option>Դավթաշեն</option><option>Էրեբունի</option><option>Կենտրոն</option><option>Մալաթիա-Սեբաստիա</option><option>Նոր Նորք</option><option>Նորք-Մարաշ</option><option>Նուբարաշեն</option><option>Շենգավիթ</option><option>Քանաքեռ-Զեյթուն</option></select><div class="err" data-e="district"></div></div>
+<div><label for="street">Փողոց (ըստ ցանկության)</label><input id="street" type="text" name="street" maxlength="80"></div>
+</div>
+<div class="row">
+<div><label for="rooms">Սենյակներ</label><input id="rooms" type="number" name="rooms" min="1" max="10" inputmode="numeric"><div class="err" data-e="rooms"></div></div>
+<div><label for="area">Մակերես (մ²)</label><input id="area" type="number" name="area" min="5" max="1000" step="0.1" inputmode="decimal"><div class="err" data-e="area"></div></div>
+<div><label for="floor">Հարկ</label><input id="floor" type="number" name="floor" min="0" inputmode="numeric"></div>
+<div><label for="ft">Շենքի հարկեր</label><input id="ft" type="number" name="floors_total" min="1" inputmode="numeric"></div>
+</div><div class="err" data-e="floor"></div>
+<div class="row">
+<div><label for="price">Ամսական գին</label><input id="price" type="number" name="price_amount" min="0" inputmode="numeric"><div class="err" data-e="price_amount"></div></div>
+<div><label for="cur">Արժույթ</label><select id="cur" name="price_currency"><option value="">Ընտրել…</option><option>USD</option><option>AMD</option></select><div class="err" data-e="price_currency"></div></div>
+<div><label for="heating">Ջեռուցում</label><select id="heating" name="heating"><option value="">Նշված չէ</option><option value="central">Կենտրոնացված</option><option value="baxi">BAXI / ավտոնոմ</option><option value="electric">Էլեկտրական</option></select></div>
+</div>
+<div class="checks"><label><input type="checkbox" name="pets"> Կենդանիներ թույլատրվում են</label><label><input type="checkbox" name="new_building"> Նորակառույց</label><label><input type="checkbox" name="no_fee"> Առանց միջնորդավճարի</label><label><input type="checkbox" name="deposit"> Դեպոզիտ է պահանջվում</label></div>
+<div><label for="desc">Նկարագրություն</label><textarea id="desc" name="description" maxlength="2000"></textarea></div>
+<div><label for="photos">Նկարներ (մինչև 6, յուրաքանչյուրը մինչև 5 ՄԲ)</label><input id="photos" type="file" name="photos" accept="image/jpeg,image/png,image/webp" multiple><div class="err" data-e="photos"></div><div class="note">Նկարները վերակոդավորվում են, և ֆայլի թաքնված տվյալները (այդ թվում GPS կոորդինատները) ջնջվում են։</div></div>
+<div class="row">
+<div><label for="role">Դուք՝</label><select id="role" name="role"><option value="">Ընտրել…</option><option value="owner">Տանտեր եմ</option><option value="agent">Միջնորդ եմ</option></select><div class="err" data-e="role"></div></div>
+<div><label for="phone">Հեռախոսահամար</label><input id="phone" type="tel" name="phone" placeholder="077 12 34 56" autocomplete="tel"><div class="err" data-e="phone"></div></div>
+</div>
+<div class="checks"><label><input type="checkbox" name="consent"> Համաձայն եմ, որ իմ հեռախոսահամարը հրապարակվի հայտարարության հետ</label></div><div class="err" data-e="consent"></div>
+<div class="err" id="top"></div>
+<button class="btn" id="go" type="submit">Ուղարկել ստուգման</button>
+</form></div>
+<script>
+var f=document.getElementById("f");
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+f.addEventListener("submit",function(ev){
+ev.preventDefault();
+document.querySelectorAll("[data-e]").forEach(function(e){e.textContent=""});document.getElementById("top").textContent="";
+var b=document.getElementById("go");b.disabled=true;
+fetch("/api/submit",{method:"POST",body:new FormData(f)}).then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})}).then(function(x){
+b.disabled=false;
+if(x.ok){
+var link=location.origin+"/manage#"+x.j.manage_token;
+var d=document.getElementById("done");d.hidden=false;f.hidden=true;
+d.innerHTML='<h2>Ստացանք։ Հայտարարությունը սպասում է ստուգման</h2><p>Պահպանեք այս հղումը. այն միակ միջոցն է հայտարարությունը հաստատելու («դեռ ազատ է»), փակելու կամ վարձակալվածը նշելու։ Հղումը չենք կարող վերականգնել։</p><code>'+esc(link)+'</code><p class="note">Հայտարարությունը թաքցվում է, եթե 14 օրվա ընթացքում չհաստատեք, որ այն դեռ ակտուալ է։</p><p><a href="'+esc(link)+'">Բացել կառավարման էջը</a></p>';
+window.scrollTo(0,0);return}
+var d=x.j.detail;
+if(d&&typeof d==="object"){Object.keys(d).forEach(function(k){var el=document.querySelector('[data-e="'+k+'"]');(el||document.getElementById("top")).textContent=d[k]})}
+else document.getElementById("top").textContent=d||"Սխալ. փորձեք կրկին";
+}).catch(function(){b.disabled=false;document.getElementById("top").textContent="Սերվերին միանալ չհաջողվեց"})});
+</script></body></html>

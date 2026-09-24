@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rental Hub Երևան — վարձով բնակարաններ մեկ տեղում</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Armenian:wght@400;500;700&family=Noto+Serif+Armenian:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F3F4;--surface:#fff;--ink:#1B2B45;--muted:#5C6880;--line:#DDD8DB;--tuff:#E9C4BC;--apricot:#E8891C;--apricot-ink:#7A3E00;--ok:#1E7A4F;--warn:#A5620A;
+--serif:"Noto Serif Armenian",Georgia,serif;--sans:"Noto Sans Armenian",system-ui,-apple-system,"Segoe UI",sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111826;--surface:#182135;--ink:#EDEFF5;--muted:#A4AEC4;--line:#2B3650;--tuff:#4A2F2E;--apricot:#F5A04A;--apricot-ink:#FFD9AE;--ok:#59C48F;--warn:#F0B35C}}
+:root[data-theme="dark"]{--bg:#111826;--surface:#182135;--ink:#EDEFF5;--muted:#A4AEC4;--line:#2B3650;--tuff:#4A2F2E;--apricot:#F5A04A;--apricot-ink:#FFD9AE;--ok:#59C48F;--warn:#F0B35C}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.65 var(--sans)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--apricot);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--serif);line-height:1.25;margin:0}
+h1{font-size:clamp(28px,5vw,48px);font-weight:800;max-width:19ch}
+h2{font-size:clamp(22px,3.4vw,32px);font-weight:800;margin-bottom:8px}
+h3{font-size:17px;font-weight:600}
+p{margin:0}
+.btn{display:inline-block;font:700 16px var(--sans);background:var(--apricot);color:#1B1200;border:0;border-radius:8px;padding:13px 22px;cursor:pointer;text-decoration:none}
+.btn:hover{filter:brightness(1.06)}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+header{border-bottom:1px solid var(--line)}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:14px 0;gap:12px}
+.logo{font:800 20px var(--serif);text-decoration:none}
+.logo i{font-style:normal;color:var(--apricot)}
+.hero{background:linear-gradient(180deg,var(--tuff),var(--bg) 92%);padding:56px 0 40px}
+.hero p.lead{max-width:56ch;color:var(--muted);margin:16px 0 28px;font-size:18px}
+.search{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;align-items:end}
+label{display:block;font-size:13px;color:var(--muted);margin-bottom:4px;font-weight:500}
+select,input[type=number]{width:100%;font:400 16px var(--sans);padding:11px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0}
+.chip{font:500 14px var(--sans);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:7px 14px;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+section{padding:48px 0}
+.resulthead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{font:500 14px var(--sans);padding:8px 16px;border:0;background:var(--surface);color:var(--ink);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.card .top{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.price{font:800 22px var(--serif)}
+.price small{font:400 13px var(--sans);color:var(--muted);display:block}
+.meta{color:var(--muted);font-size:14px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:12.5px;padding:2px 9px;border-radius:99px;border:1px solid var(--line)}
+.tag.ok{color:var(--ok);border-color:var(--ok)}
+.tag.warn{color:var(--warn);border-color:var(--warn)}
+.card .foot{margin-top:auto;padding-top:8px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.card a.src{font-weight:700;color:var(--ink)}
+.card img{width:100%;height:150px;object-fit:cover;border-radius:8px}
+.call{font-weight:700;text-decoration:none;background:var(--apricot);color:#1B1200;padding:6px 12px;border-radius:6px}
+.empty{grid-column:1/-1;padding:28px;border:2px dashed var(--line);border-radius:12px;text-align:center;color:var(--muted)}
+.note{font-size:13px;color:var(--muted);margin-top:14px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:28px;margin-top:22px}
+.cols p{color:var(--muted);margin-top:6px}
+.alt{background:var(--surface);border-block:1px solid var(--line)}
+.steps{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:14px;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:12px}
+.steps li::before{content:counter(s);width:34px;height:34px;border-radius:50%;background:var(--apricot);color:#1B1200;font-weight:700;display:grid;place-items:center}
+.steps b{display:block}
+.steps span{color:var(--muted)}
+.cta{background:var(--ink);color:var(--bg);border-radius:16px;padding:36px 28px}
+.cta p{margin:10px 0 20px;max-width:56ch;opacity:.85}
+.cta .btn{background:var(--apricot);color:#1B1200}
+footer{padding:32px 0 40px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header><div class="wrap bar"><a class="logo" href="#">Rental<i>Hub</i> Երևան</a><a class="btn" href="/submit" style="padding:8px 16px;font-size:14px">Տեղադրել հայտարարություն</a></div></header>
+
+<main>
+<div class="hero"><div class="wrap">
+<h1>Երևանում վարձով բնակարան՝ առանց կրկնակի հայտարարությունների և հին գների</h1>
+<p class="lead">Հավաքում ենք հայտարարությունները մեկ տեղում, միավորում նույն բնակարանի կրկնօրինակները և ցույց տալիս, թե երբ է վերջին անգամ ստուգվել յուրաքանչյուրը։</p>
+<div class="search" role="search">
+<div><label for="dist">Շրջան</label><select id="dist"><option value="">Բոլորը</option><option>Աջափնյակ</option><option>Ավան</option><option>Արաբկիր</option><option>Դավթաշեն</option><option>Էրեբունի</option><option>Կենտրոն</option><option>Մալաթիա-Սեբաստիա</option><option>Նոր Նորք</option><option>Նորք-Մարաշ</option><option>Նուբարաշեն</option><option>Շենգավիթ</option><option>Քանաքեռ-Զեյթուն</option></select></div>
+<div><label for="rooms">Սենյակներ</label><select id="rooms"><option value="0">Ցանկացած</option><option value="1">1</option><option value="2">2</option><option value="3">3+</option></select></div>
+<div><label for="max">Առավելագույն գին (<span id="cur1">USD</span>)</label><input id="max" type="number" min="0" placeholder="օր. 600" inputmode="numeric"></div>
+<a class="btn" href="#results" style="text-align:center">Փնտրել</a>
+</div>
+<div class="filters" id="chips" role="group" aria-label="Լրացուցիչ ֆիլտրեր">
+<button class="chip" data-f="pets" aria-pressed="false">Կենդանիներ թույլատրվում են</button>
+<button class="chip" data-f="central" aria-pressed="false">Կենտրոնացված ջեռուցում</button>
+<button class="chip" data-f="baxi" aria-pressed="false">BAXI</button>
+<button class="chip" data-f="newb" aria-pressed="false">Նորակառույց</button>
+<button class="chip" data-f="nofee" aria-pressed="false">Առանց միջնորդավճարի</button>
+<button class="chip" data-f="owner" aria-pressed="false">Միայն հավանաբար տանտեր</button>
+<button class="chip" data-f="fresh" aria-pressed="false">Ստուգված 24 ժ-ի ընթացքում</button>
+</div>
+</div></div>
+
+<section id="results"><div class="wrap">
+<div class="resulthead"><h2 id="count">Արդյունքներ</h2>
+<div class="seg" role="group" aria-label="Արժույթ"><button id="bAMD" aria-pressed="false">AMD</button><button id="bUSD" aria-pressed="true">USD</button></div></div>
+<div class="grid" id="grid" aria-live="polite"></div>
+<p class="note">Փոխարժեք՝ 1 USD = <span id="rate">…</span> AMD։ «Դեմո» նշումով քարտերը փորձնական տվյալներ են, իրականները հայտնվում են հավաքագրումից հետո։</p>
+</div></section>
+
+<section class="alt"><div class="wrap">
+<h2>Ինչով ենք տարբերվում</h2>
+<div class="cols">
+<div><h3>Մեկ բնակարան՝ մեկ քարտ</h3><p>Նույն տունը, որ տեղադրված է հինգ տեղում, երևում է մեկ անգամ՝ «Տեղադրված է 5 տեղում» նշումով։</p></div>
+<div><h3>Թարմության նշան</h3><p>Ամեն քարտի վրա երևում է վերջին ստուգման ժամանակը։ Անհասանելի հայտարարությունները նշվում են առանձին։</p></div>
+<div><h3>Գները երկու արժույթով</h3><p>AMD և USD։ Բնօրինակ գինը միշտ պահվում է, փոխարկումը միայն ցուցադրման համար է։</p></div>
+<div><h3>Կասկածելի էժան առաջարկներ</h3><p>Եթե գինը շատ ցածր է նույն շրջանի և սենյակների մեդիանից, քարտը նշվում է՝ կանխելու համար դատարկ զանգերը։</p></div>
+<div><h3>Տանտեր, թե միջնորդ</h3><p>Նշում ենք «հավանաբար տանտեր» կամ «հավանաբար միջնորդ»։ Ալգորիթմը կարող է սխալվել, դրա համար գրում ենք «հավանաբար»։</p></div>
+</div></div></section>
+
+<section><div class="wrap">
+<h2>Ինչպես է դա աշխատում</h2>
+<ol class="steps">
+<li><div><b>Հավաքում ենք</b><span>Հայտարարություններ ենք վերցնում թույլատրված աղբյուրներից, միայն անհրաժեշտ տվյալները՝ գին, պարամետրեր, հղում։</span></div></li>
+<li><div><b>Միավորում ենք</b><span>Նույն բնակարանը ճանաչում ենք նկարների, հասցեի և պարամետրերի համընկնմամբ։</span></div></li>
+<li><div><b>Վերստուգում ենք</b><span>Օրիգինալ հղումը պարբերաբար ստուգվում է, և հանված հայտարարությունը նշվում է որպես անհասանելի։</span></div></li>
+<li><div><b>Դուք բացում եք օրիգինալը</b><span>Ամեն քարտ տանում է դեպի աղբյուրը։ Դուք զանգում եք ուղիղ։</span></div></li>
+</ol>
+<p style="margin-top:24px"><a class="btn" href="#results">Սկսել որոնումը՝ ընտրել շրջանը և գինը</a></p>
+</div></section>
+
+<section id="author" class="alt"><div class="wrap">
+<div class="cta">
+<h2>Հեղինակի մասին</h2>
+<p>Այս հարթակը կառուցել է [Անուն Ազգանուն]՝ web developer, ով զբաղվում է բարդ տվյալների հետ աշխատող կայքերով։ Rental Hub-ը իմ պրակտիկ նախագիծն է. այն ցույց է տալիս, թե ինչպես կարելի է իրական, անկանոն տվյալները վերածել հասկանալի և վստահելի արտադրանքի՝ scraping, դեդուպլիկացիա, քարտեզ և որոնում։</p>
+<p><b>Պե՞տք է ձեզ կայք կամ landing page՝ բարդ ֆունկցիոնալով։</b> Գրեք ինձ՝ [email / Telegram / հեռ.]</p>
+<a class="btn" href="#author">Պատվիրել կայք</a>
+</div></div></section>
+</main>
+
+<footer><div class="wrap">Հայտարարությունների բովանդակությունը պատկանում է նրանց աղբյուրներին։ Յուրաքանչյուր քարտ հղում է դեպի օրիգինալը։</div></footer>
+
+<script>
+var cur="USD",F={},RATE=385,timer;
+function nf(n){return Math.round(n).toLocaleString("en-US").replace(/,/g," ")}
+function ago(h){return h<1?"մի քանի րոպե առաջ":h<24?Math.round(h)+" ժ առաջ":Math.floor(h/24)+" օր առաջ"}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function q(){
+var p=new URLSearchParams(),d=document.getElementById("dist").value,r=document.getElementById("rooms").value,m=document.getElementById("max").value;
+if(d)p.set("district",d);if(+r)p.set("rooms",r);if(m){p.set("max_price",m);p.set("currency",cur)}
+if(F.pets)p.set("pets","true");if(F.central)p.set("heating","central");if(F.baxi)p.set("heating","baxi");
+if(F.newb)p.set("new_building","true");if(F.nofee)p.set("no_fee","true");if(F.owner)p.set("owner_only","true");if(F.fresh)p.set("fresh_hours","24");
+return p.toString()}
+function card(x){
+var main,alt;
+if(x.price_usd==null){main=nf(x.price_amount);alt="Արժույթը հայտնի չէ, ստուգեք օրիգինալում"}
+else if(cur==="USD"){main="$"+nf(x.price_usd);alt="≈ "+nf(x.price_amd)+" դր."}
+else{main=nf(x.price_amd)+" դր.";alt="≈ $"+nf(x.price_usd)}
+var stale=x.hours_since_check>48,n=x.sources.length,src=x.sources[0];
+var t=[];
+t.push(stale?'<span class="tag warn">Հնարավոր է հնացած</span>':'<span class="tag ok">Թարմ</span>');
+t.push('<span class="tag">'+(x.landlord==="owner"?"Հավանաբար տանտեր":x.landlord==="agent"?"Հավանաբար միջնորդ":"Տանտեր/միջնորդ՝ անհայտ")+'</span>');
+if(x.pets===1)t.push('<span class="tag">Կենդանիներ՝ այո</span>');
+if(x.heating)t.push('<span class="tag">'+(x.heating==="baxi"?"BAXI":"Կենտրոնացված")+'</span>');
+if(x.new_building)t.push('<span class="tag">Նորակառույց</span>');
+if(x.no_fee)t.push('<span class="tag ok">Առանց միջնորդավճարի</span>');
+if(x.price_flag==="low")t.push('<span class="tag warn">Գինը շատ ցածր է մեդիանից</span>');
+if(x.direct)t.push('<span class="tag ok">Տեղադրված է ուղիղ հարթակում</span>');
+if(x.direct&&x.deposit)t.push('<span class="tag">Դեպոզիտ՝ այո</span>');
+if(x.is_demo)t.push('<span class="tag">Դեմո</span>');
+return '<article class="card">'+(x.photo?'<img src="'+esc(x.photo)+'" alt="" loading="lazy">':'')+'<div class="top"><div><h3>'+esc(x.district||"Շրջանը նշված չէ")+(x.rooms?', '+x.rooms+' սենյակ':'')+'</h3><div class="meta">'+(x.area?x.area+' մ²':'')+(x.floor?' · '+x.floor+(x.floors_total?'/'+x.floors_total:'')+' հարկ':'')+'</div></div><div class="price">'+main+'<small>'+alt+'</small></div></div><div class="tags">'+t.join("")+'</div>'+(x.description?'<p class="meta">'+esc(x.description.slice(0,160))+'</p>':'')+'<div class="foot"><span>Ստուգվել է '+ago(x.hours_since_check)+(n>1?' · '+n+' տեղում':'')+'</span>'+(x.direct&&x.contact_phone?'<a class="call" href="tel:'+esc(x.contact_phone)+'">Զանգել</a>':'<a class="src" href="'+esc(src.url)+'" target="_blank" rel="noopener noreferrer">Բացել օրիգինալում</a>')+'</div></article>'}
+function load(){
+var g=document.getElementById("grid");
+fetch("/api/listings?"+q()).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){
+RATE=j.rate;document.getElementById("count").textContent="Գտնվել է "+j.count+" բնակարան";
+g.innerHTML=j.items.length?j.items.map(card).join(""):'<div class="empty">Ոչինչ չգտնվեց։ Հանեք մեկ-երկու ֆիլտր կամ մեծացրեք գնի սահմանը։</div>';
+document.getElementById("rate").textContent=j.rate;
+}).catch(function(){g.innerHTML='<div class="empty">Սերվերին միանալ չհաջողվեց։ Ստուգեք, որ API-ն աշխատում է (uvicorn app.main:app), և թարմացրեք էջը։</div>'})}
+function later(){clearTimeout(timer);timer=setTimeout(load,250)}
+function setCur(c){cur=c;document.getElementById("bUSD").setAttribute("aria-pressed",c==="USD");document.getElementById("bAMD").setAttribute("aria-pressed",c==="AMD");document.getElementById("cur1").textContent=c;load()}
+document.getElementById("bUSD").onclick=function(){setCur("USD")};
+document.getElementById("bAMD").onclick=function(){setCur("AMD")};
+["dist","rooms","max"].forEach(function(id){document.getElementById(id).addEventListener("input",later)});
+document.getElementById("chips").addEventListener("click",function(e){
+var b=e.target.closest(".chip");if(!b)return;
+var k=b.dataset.f;F[k]=!F[k];b.setAttribute("aria-pressed",!!F[k]);
+if(F.central&&F.baxi&&(k==="central"||k==="baxi")){var o=k==="central"?"baxi":"central";F[o]=false;document.querySelector('[data-f="'+o+'"]').setAttribute("aria-pressed","false")}
+load()});
+load();
+</script>
+</body>
+</html>

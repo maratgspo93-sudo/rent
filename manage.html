@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="hy"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer"><title>Հայտարարության կառավարում</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Armenian:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F3F4;--surface:#fff;--ink:#1B2B45;--muted:#5C6880;--line:#DDD8DB;--apricot:#E8891C}
+@media (prefers-color-scheme:dark){:root{--bg:#111826;--surface:#182135;--ink:#EDEFF5;--muted:#A4AEC4;--line:#2B3650;--apricot:#F5A04A}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 "Noto Sans Armenian",system-ui,sans-serif}
+.wrap{max-width:560px;margin:0 auto;padding:24px 20px}.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.btn{font:700 16px inherit;background:var(--apricot);color:#1B1200;border:0;border-radius:8px;padding:12px 18px;cursor:pointer;margin:6px 8px 0 0}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}a{color:inherit}.m{color:var(--muted)}
+</style></head><body><div class="wrap"><a href="/">← Որոնում</a><h1>Ձեր հայտարարությունը</h1>
+<div class="box" id="b">Բեռնվում է…</div></div>
+<script>
+var T=decodeURIComponent(location.hash.slice(1)),SL={pending:"Սպասում է ստուգման",active:"Հրապարակված է",gone:"Թաքցված է (վարձակալված կամ ժամկետանց)",rejected:"Մերժված է"};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function post(u,cb){fetch(u,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:T})}).then(function(r){if(!r.ok)throw 0;cb()}).catch(function(){alert("Գործողությունը չհաջողվեց")})}
+function load(){
+var b=document.getElementById("b");
+if(!T){b.textContent="Հղումը թերի է. օգտագործեք հայտարարություն տեղադրելիս ստացած ամբողջական հղումը։";return}
+fetch("/api/manage?token="+encodeURIComponent(T)).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(s){
+b.innerHTML='<p><b>'+esc(s.district)+', '+esc(s.rooms)+' սենյակ · '+esc(s.price_amount)+' '+esc(s.price_currency)+'</b></p><p class="m">Կարգավիճակ՝ '+esc(SL[s.status]||s.status)+'<br>Վերջին հաստատում՝ '+esc(s.last_checked)+'</p>'+
+(s.status==="active"||s.status==="gone"?'<button class="btn" id="c">Դեռ ազատ է</button>':'')+
+(s.status==="active"||s.status==="pending"?'<button class="btn ghost" id="r">Վարձակալվեց / հանել</button>':'');
+var c=document.getElementById("c"),r=document.getElementById("r");
+if(c)c.onclick=function(){post("/api/manage/confirm",load)};
+if(r)r.onclick=function(){if(confirm("Հանե՞լ հայտարարությունը։"))post("/api/manage/rented",load)};
+}).catch(function(){b.textContent="Հայտարարությունը չգտնվեց. ստուգեք հղումը։"})}
+load();
+</script></body></html>

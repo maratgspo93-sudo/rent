@@ -1,0 +1,7 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9   # ձևերի/նկարների ընդունման համար
+# Telegram-ի հավաքագրման համար (ըստ ցանկության)
+telethon>=1.36
+imagehash>=4.3
+Pillow>=10
